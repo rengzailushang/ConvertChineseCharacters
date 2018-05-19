@@ -8,7 +8,7 @@ class ChineseCharactersToUnicodeCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         fileName = self.view.file_name()
         fileSuffix = re.match(r'.+\.(\w+)$',fileName).group(1)
-        if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "css":  
+        if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "css" or fileSuffix == "properties":  
             def TU(x):
                 if fileSuffix == "js" or fileSuffix == "json":
                     return '\\u'+('000'+hex(ord(x))[2:])[-4:]
@@ -40,7 +40,7 @@ class UnicodeToChineseCharactersCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         fileName = self.view.file_name()
         fileSuffix = re.match(r'.+\.(\w+)$',fileName).group(1)
-        if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "css":
+        if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "css" or fileSuffix == "properties":
             def unicodeTo(x):
                 s = x.group(0)
                 if fileSuffix == "js" or fileSuffix == "json":
