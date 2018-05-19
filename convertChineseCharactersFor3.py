@@ -10,7 +10,7 @@ class ChineseCharactersToUnicodeCommand(sublime_plugin.TextCommand):
         fileSuffix = re.match(r'.+\.(\w+)$',fileName).group(1)
         if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "css" or fileSuffix == "properties":  
             def TU(x):
-                if fileSuffix == "js" or fileSuffix == "json":
+                if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "properties":
                     return '\\u'+('000'+hex(ord(x))[2:])[-4:]
                 else:
                     return '\\'+('000'+hex(ord(x))[2:])[-4:]  
@@ -43,7 +43,7 @@ class UnicodeToChineseCharactersCommand(sublime_plugin.TextCommand):
         if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "css" or fileSuffix == "properties":
             def unicodeTo(x):
                 s = x.group(0)
-                if fileSuffix == "js" or fileSuffix == "json":
+                if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "properties":
                     s = s[2:]
                 else:
                     s = s[1:]
@@ -54,7 +54,7 @@ class UnicodeToChineseCharactersCommand(sublime_plugin.TextCommand):
                 for region in regions:
                     if not region.empty():
                         s = self.view.substr(region)
-                        if fileSuffix == "js" or fileSuffix == "json":
+                        if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "properties":
                             s = re.sub(r"(\\[uU]\w{4})",unicodeTo,s)
                         else:
                             s = re.sub(r"(\\\w{4})",unicodeTo,s)
@@ -62,7 +62,7 @@ class UnicodeToChineseCharactersCommand(sublime_plugin.TextCommand):
             else:
                 region = sublime.Region(0, self.view.size())
                 s = self.view.substr(region)
-                if fileSuffix == "js" or fileSuffix == "json":
+                if fileSuffix == "js" or fileSuffix == "json" or fileSuffix == "properties":
                     s = re.sub(r"(\\[uU]\w{4})",unicodeTo,s)
                 else:
                     s = re.sub(r"(\\\w{4})",unicodeTo,s)
